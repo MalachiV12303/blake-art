@@ -19,7 +19,7 @@ import landingBg from "@assets/landing.png";
 
 <style>
 :root{
-  --background: #dfdfdf;
+  --background: #ececec;
   --foreground: #131313;
 }
 
