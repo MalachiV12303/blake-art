@@ -164,7 +164,7 @@ watch(selectedIndex, (val) => {
     <masonry-wall :items="items" :ssr-columns="1" :column-width="400" :gap="8">
         <template #default="{ item, index }">
             <button @click="openImage(index)" class="masonry-item">
-                <img :src="item.url" :alt="'image #' + index" />
+                <img loading="lazy" :src="item.url" :alt="'image #' + index" />
                 <span class="tempClass zalando-sans-expanded">{{ formatDate(item.year, item.month) }}</span>
             </button>
         </template>
@@ -184,7 +184,7 @@ watch(selectedIndex, (val) => {
 
         <!-- 🚀 Image with transition -->
         <Transition :name="direction">
-            <img :key="items[selectedIndex].url" :src="items[selectedIndex].url" :alt="'image #' + selectedIndex"
+            <img loading="lazy" :key="items[selectedIndex].url" :src="items[selectedIndex].url" :alt="'image #' + selectedIndex"
                 class="fullscreen-content" @click.stop />
         </Transition>
 
