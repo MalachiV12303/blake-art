@@ -164,7 +164,7 @@ watch(selectedIndex, (val) => {
     <masonry-wall :items="items" :ssr-columns="1" :column-width="400" :gap="8">
         <template #default="{ item, index }">
             <button @click="openImage(index)" class="masonry-item">
-                <img loading="lazy" :src="item.url" :alt="'image #' + index" />
+                <img loading="lazy" decoding="async" :src="item.url" :alt="'image #' + index" />
                 <span class="tempClass zalando-sans-expanded">{{ formatDate(item.year, item.month) }}</span>
             </button>
         </template>
