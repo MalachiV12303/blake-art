@@ -161,7 +161,7 @@ watch(selectedIndex, (val) => {
 </script>
 
 <template>
-    <masonry-wall :items="items" :ssr-columns="1" :column-width="400" :gap="8">
+    <masonry-wall :lazy="true" :items="items" :ssr-columns="1" :column-width="400" :gap="8">
         <template #default="{ item, index }">
             <button @click="openImage(index)" class="masonry-item">
                 <img loading="lazy" decoding="async" :src="item.url" :alt="'image #' + index" />
