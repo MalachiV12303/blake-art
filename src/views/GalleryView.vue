@@ -135,8 +135,10 @@ watch(selectedIndex, (val) => {
 // 🧠 SEQUENTIAL IMAGE LOADING CONTROL
 const visibleCount = ref(1); // number of images allowed to load
 
-function handleImageLoad(index: number) {
+function handleImageLoad(event: Event, index: number) {
   // When an image finishes loading, enable the next one
+  const img = event.target as HTMLImageElement;
+  img.classList.add('loaded');
   if (index + 1 <= items.length) {
     setTimeout(() => {
       visibleCount.value = Math.min(visibleCount.value + 1, items.length);
@@ -162,7 +164,8 @@ function handleImageLoad(index: number) {
         <img
           :src="item.url"
           :alt="'image #' + index"
-          @load="handleImageLoad(index)"
+          class="image"
+          @load="handleImageLoad($event, index)"
           decoding="async"
         />
         <span class="tempClass zalando-sans-expanded">{{ formatDate(item.year, item.month) }}</span>
@@ -306,5 +309,13 @@ function handleImageLoad(index: number) {
   .nav-btn {
     display: none;
   }
+}
+.image {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.image.loaded {
+  opacity: 1;
 }
 </style>
