@@ -2,14 +2,13 @@
 import { RouterView } from 'vue-router';
 import Navbar from "@components/Navbar.vue";
 import Footer from "@components/Footer.vue";
-import landingBg from "@assets/landing.png";
 </script>
 
 <template>
   <Navbar></Navbar>
   <main class="container zalando-sans-expanded">
     <RouterView v-slot="{ Component }">
-      <Transition name='fade' mode="out-in">
+      <Transition name="fade" mode="out-in">
         <component :is="Component" />
       </Transition>
     </RouterView>
@@ -18,7 +17,7 @@ import landingBg from "@assets/landing.png";
 </template>
 
 <style>
-:root{
+:root {
   --background: #ececec;
   --foreground: #131313;
 }
@@ -27,7 +26,7 @@ body {
   margin: 0;
 }
 
-html{
+html {
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -43,5 +42,20 @@ html{
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>

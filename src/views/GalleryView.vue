@@ -77,8 +77,8 @@ const items = [
 ];
 
 const months = [
-  "January","February","March","April","May","June",
-  "July","August","September","October","November","December"
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
 ];
 const formatDate = (year: number, month: number) => `${months[month - 1]} - ${year}`;
 
@@ -131,76 +131,48 @@ watch(selectedIndex, (val) => {
   document.body.style.overflow = val !== null ? "hidden" : "";
 });
 
-
-// 🧠 SEQUENTIAL IMAGE LOADING CONTROL
 const visibleCount = ref(1); // number of images allowed to load
-
 function handleImageLoad(event: Event, index: number) {
-  // When an image finishes loading, enable the next one
   const img = event.target as HTMLImageElement;
   img.classList.add('loaded');
   if (index + 1 <= items.length) {
     setTimeout(() => {
       visibleCount.value = Math.min(visibleCount.value + 1, items.length);
-    }, 100); // slight delay for smooth sequence
+    }, 100);
   }
 }
 </script>
 
 <template>
-  <!-- Masonry layout -->
-  <masonry-wall
-    :items="items"
-    :ssr-columns="1"
-    :column-width="400"
-    :gap="8"
-  >
+  <masonry-wall :items="items" :ssr-columns="1" :column-width="400" :gap="8">
     <template #default="{ item, index }">
-      <button
-        v-if="index < visibleCount"
-        @click="openImage(index)"
-        class="masonry-item"
-      >
-        <img
-          :src="item.url"
-          :alt="'image #' + index"
-          class="image"
-          @load="handleImageLoad($event, index)"
-          decoding="async"
-        />
+      <button v-if="index < visibleCount" @click="openImage(index)" class="masonry-item">
+        <img :src="item.url" :alt="'image #' + index" class="image" @load="handleImageLoad($event, index)"
+          decoding="async" />
         <span class="tempClass zalando-sans-expanded">{{ formatDate(item.year, item.month) }}</span>
       </button>
-
-      <!-- hidden placeholder to preserve layout while waiting -->
+      <!-- placeholder to preserve layout while waiting -->
       <div v-else class="masonry-item placeholder"></div>
     </template>
   </masonry-wall>
 
-  <div
-    v-if="selectedIndex !== null"
-    class="fullscreen-image"
-    @click="closeImage"
-    @touchstart="handleTouchStart"
-    @touchend="handleTouchEnd"
-  >
-    <button class="nav-btn left zalando-sans-expanded" @click.stop="showPrev">‹</button>
+  <Transition name="fade">
+    <div v-if="selectedIndex !== null" class="fullscreen-image" @click="closeImage" @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd">
+      <button class="nav-btn left zalando-sans-expanded" @click.stop="showPrev">‹</button>
 
-    <div class="counter">
-      <span>{{ getFormattedIndex(selectedIndex + 1) }}/{{ items.length }}</span>
+      <div class="counter">
+        <span>{{ getFormattedIndex(selectedIndex + 1) }}/{{ items.length }}</span>
+      </div>
+
+      <Transition :name="direction">
+        <img :key="items[selectedIndex].url" :src="items[selectedIndex].url" :alt="'image #' + selectedIndex"
+          class="fullscreen-content" @click.stop />
+      </Transition>
+
+      <button class="nav-btn right zalando-sans-expanded" @click.stop="showNext">›</button>
     </div>
-
-    <Transition :name="direction">
-      <img
-        :key="items[selectedIndex].url"
-        :src="items[selectedIndex].url"
-        :alt="'image #' + selectedIndex"
-        class="fullscreen-content"
-        @click.stop
-      />
-    </Transition>
-
-    <button class="nav-btn right zalando-sans-expanded" @click.stop="showNext">›</button>
-  </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -209,6 +181,7 @@ function handleImageLoad(event: Event, index: number) {
   text-align: start;
   padding-top: 0.25rem;
 }
+
 .placeholder {
   width: 100%;
   height: 300px;
@@ -216,6 +189,7 @@ function handleImageLoad(event: Event, index: number) {
   opacity: 0.2;
   border-radius: 6px;
 }
+
 .counter {
   position: absolute;
   top: 5%;
@@ -223,6 +197,7 @@ function handleImageLoad(event: Event, index: number) {
   font-size: 3rem;
   color: white;
 }
+
 .masonry-item {
   width: 100%;
   background: none;
@@ -231,6 +206,7 @@ function handleImageLoad(event: Event, index: number) {
   margin: 0;
   cursor: pointer;
 }
+
 .masonry-item img {
   width: 100%;
   height: auto;
@@ -239,9 +215,11 @@ function handleImageLoad(event: Event, index: number) {
   filter: brightness(95%);
   transition: all 0.2s ease-in-out;
 }
+
 .masonry-item img:hover {
   filter: brightness(100%);
 }
+
 .fullscreen-image {
   position: fixed;
   inset: 0;
@@ -254,11 +232,13 @@ function handleImageLoad(event: Event, index: number) {
   justify-content: center;
   z-index: 1000;
 }
+
 .fullscreen-content {
   max-width: 90%;
   max-height: 90%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
+
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -271,45 +251,56 @@ function handleImageLoad(event: Event, index: number) {
   z-index: 1100;
   transition: all 0.2s ease-in-out;
 }
+
 .nav-btn:hover {
   scale: 1.02;
 }
+
 .nav-btn.left {
   left: 3%;
 }
+
 .nav-btn.right {
   right: 3%;
 }
+
 .next-enter-active,
 .prev-enter-active {
   transition: all 0.4s ease;
 }
+
 .next-leave-active,
 .prev-leave-active {
   transition: all 0.4s ease;
   position: absolute;
 }
+
 .next-enter-from {
   transform: translateX(100%);
   opacity: 0;
 }
+
 .next-leave-to {
   transform: translateX(-100%);
   opacity: 0;
 }
+
 .prev-enter-from {
   transform: translateX(-100%);
   opacity: 0;
 }
+
 .prev-leave-to {
   transform: translateX(100%);
   opacity: 0;
 }
-@media screen and (max-width: 767px) {
+
+@media screen and (max-width: 840px) {
   .nav-btn {
     display: none;
   }
 }
+
 .image {
   opacity: 0;
   transition: opacity 0.6s ease;

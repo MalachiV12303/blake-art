@@ -4,7 +4,7 @@
 <template>
     <footer class="container zalando-sans-expanded">
         <div>
-            <a href='https://www.malachidev.com/' rel="noreferrer noopener" target="_blank">: website by malachi valle</a>
+            <a href='https://www.malachidev.com/' rel="noreferrer noopener" target="_blank">: by malachi</a>
         </div>
     </footer>
 </template>

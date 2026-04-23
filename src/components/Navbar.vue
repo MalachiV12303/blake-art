@@ -10,61 +10,59 @@ import TiktokSVG from "@assets/TiktokSVG.vue";
         <div class="banner container">
             <div class="link-container">
                 <img class="logo-image" :src="logo" :alt="'Logo Icon'" />
-                <span class="icon-container">
+                <span class="icon-container zalando-sans-expanded">
                     <a href="https://www.instagram.com/b.lakedraws/" target="_blank" rel="noopener noreferrer">
-                        <InstagramSVG :width="35" :height="35" />
+                        <InstagramSVG :width="40" :height="40" />
                         <span class="handle">b.lakedraws</span>
                     </a>
                     <a href="https://www.tiktok.com/@be.lakii" target="_blank" rel="noopener noreferrer">
-                        <TiktokSVG :width="35" :height="35" />
+                        <TiktokSVG :width="40" :height="40" />
                         <span class="handle">be.lakii</span>
                     </a>
                 </span>
             </div>
             <h1 class="desktop-name zalando-sans-expanded">Blake Smith</h1>
-
         </div>
-        <!-- <div class="link-container">
-            <InstagramSVG :width="35" :height="35" />
-            <TiktokSVG :width="35" :height="35" />
-        </div> -->
         <h1 class="container mobile-name zalando-sans-expanded">Blake Smith</h1>
     </nav>
 </template>
 
 <style scoped>
 a {
-  position: relative;          /* for underline */
-  display: inline-flex;        /* horizontal layout */
-  align-items: center;         /* vertically center SVG + text */
-  gap: 0.5rem;                 /* space between icon + text */
-  color: inherit;
-  text-decoration: none;
-  font-size: 1.25rem;
-  transition: transform 0.2s ease-in-out;
+    position: relative;
+    /* for underline */
+    display: inline-flex;
+    /* horizontal layout */
+    align-items: center;
+    /* vertically center SVG + text */
+    gap: 0.5rem;
+    /* space between icon + text */
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: transform 0.2s ease-in-out;
 }
 
-/* Optional: keep SVG vertically centered if needed */
 a svg {
-  display: block;
+    display: block;
 }
 
-/* Animated underline */
+/* animated underline */
 a::after {
-  content: "";
-  position: absolute;
-  bottom: -3px;                /* adjust spacing under text */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 a:hover::after {
-  transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 .icon-container {
@@ -79,6 +77,7 @@ nav {
     top: 0;
     z-index: 20;
     background-color: var(--background);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 4px -4px rgb(0 0 0 / 0.1);
 }
 
 .link-container {
@@ -114,7 +113,7 @@ nav {
     text-align: start;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 840px) {
     .handle {
         display: none;
     }
