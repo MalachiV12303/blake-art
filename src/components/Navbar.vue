@@ -9,9 +9,10 @@ import TiktokSVG from "@assets/TiktokSVG.vue";
     <nav>
         <div class="banner container">
             <div class="link-container">
-                <img class="logo-image" :src="logo" :alt="'Logo Icon'" />
-                <h1 class="container mobile-name zalando-sans-expanded">Blake Smith</h1>
-
+                <div class="logo-name-container">
+                    <img class="logo-image" :src="logo" :alt="'Logo Icon'" />
+                    <h1 class="mobile-name zalando-sans-expanded">Blake Smith</h1>
+                </div>
                 <span class="icon-container zalando-sans-expanded">
                     <a href="https://www.instagram.com/b.lakedraws/" target="_blank" rel="noopener noreferrer">
                         <InstagramSVG :width="40" :height="40" />
@@ -114,6 +115,12 @@ nav {
     text-align: start;
 }
 
+.logo-name-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 @media screen and (max-width: 840px) {
     .handle {
         display: none;
@@ -140,7 +147,7 @@ nav {
 
     .icon-container {
         display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
     }
 }
 </style>
