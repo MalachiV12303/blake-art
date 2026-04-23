@@ -168,7 +168,7 @@ function handleImageLoad(event: Event, index: number) {
           <span>/{{ items.length }}</span>
         </div>
         <Transition :name="direction">
-          <span :key="selectedIndex">
+          <span class="counter-date" :key="selectedIndex">
             {{ formatDate(items[selectedIndex].year, items[selectedIndex].month) }}
           </span>
         </Transition>
@@ -209,6 +209,10 @@ function handleImageLoad(event: Event, index: number) {
 .counter {
   font-size: 3rem;
   font-variant-numeric: tabular-nums;
+}
+
+.counter-date {
+  text-wrap: nowrap;
 }
 
 .masonry-item {
