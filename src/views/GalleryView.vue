@@ -162,9 +162,16 @@ function handleImageLoad(event: Event, index: number) {
       @touchend="handleTouchEnd">
       <button class="nav-btn left zalando-sans-expanded" @click.stop="showPrev">‹</button>
 
-      <div class="counter">
-        <NumberFlow :value="selectedIndex + 1" :format="{ minimumIntegerDigits: 2, useGrouping: false }"/>
-        <span>/{{ items.length }}</span>
+      <div class="counter-container">
+        <div class="counter">
+          <NumberFlow :value="selectedIndex + 1" :format="{ minimumIntegerDigits: 2, useGrouping: false }" />
+          <span>/{{ items.length }}</span>
+        </div>
+        <Transition :name="direction">
+          <span :key="selectedIndex">
+            {{ formatDate(items[selectedIndex].year, items[selectedIndex].month) }}
+          </span>
+        </Transition>
       </div>
 
       <Transition :name="direction">
@@ -192,12 +199,15 @@ function handleImageLoad(event: Event, index: number) {
   border-radius: 6px;
 }
 
-.counter {
+.counter-container {
   position: absolute;
   top: 5%;
   left: 4%;
-  font-size: 3rem;
   color: white;
+}
+
+.counter {
+  font-size: 3rem;
   font-variant-numeric: tabular-nums;
 }
 
@@ -298,12 +308,6 @@ function handleImageLoad(event: Event, index: number) {
   opacity: 0;
 }
 
-@media screen and (max-width: 840px) {
-  .nav-btn {
-    display: none;
-  }
-}
-
 .image {
   opacity: 0;
   transition: opacity 0.6s ease;
@@ -311,5 +315,23 @@ function handleImageLoad(event: Event, index: number) {
 
 .image.loaded {
   opacity: 1;
+}
+
+@media screen and (max-width: 840px) {
+  .nav-btn {
+    display: none;
+  }
+
+  .counter-container {
+    top: 2%;
+  }
+
+  .counter {
+    font-size: 2rem;
+  }
+
+  .fullscreen-content {
+    max-height: 75%;
+  }
 }
 </style>
