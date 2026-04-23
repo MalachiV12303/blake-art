@@ -10,6 +10,8 @@ import TiktokSVG from "@assets/TiktokSVG.vue";
         <div class="banner container">
             <div class="link-container">
                 <img class="logo-image" :src="logo" :alt="'Logo Icon'" />
+                <h1 class="container mobile-name zalando-sans-expanded">Blake Smith</h1>
+
                 <span class="icon-container zalando-sans-expanded">
                     <a href="https://www.instagram.com/b.lakedraws/" target="_blank" rel="noopener noreferrer">
                         <InstagramSVG :width="40" :height="40" />
@@ -23,7 +25,6 @@ import TiktokSVG from "@assets/TiktokSVG.vue";
             </div>
             <h1 class="desktop-name zalando-sans-expanded">Blake Smith</h1>
         </div>
-        <h1 class="container mobile-name zalando-sans-expanded">Blake Smith</h1>
     </nav>
 </template>
 
@@ -65,11 +66,6 @@ a:hover::after {
     transform: scaleX(1);
 }
 
-.icon-container {
-    display: flex;
-    gap: 1rem;
-}
-
 nav {
     padding: 0.75rem 0;
     position: sticky;
@@ -78,6 +74,11 @@ nav {
     z-index: 20;
     background-color: var(--background);
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 4px -4px rgb(0 0 0 / 0.1);
+}
+
+.icon-container {
+    display: flex;
+    gap: 1rem;
 }
 
 .link-container {
@@ -107,7 +108,7 @@ nav {
 }
 
 .mobile-name {
-    font-size: 2rem;
+    font-size: 1.5rem;
     display: none;
     margin: 0 auto;
     text-align: start;
@@ -129,6 +130,17 @@ nav {
     .link-container {
         justify-content: space-between;
         width: 100%;
+        gap: 0;
+    }
+
+    .logo-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .icon-container {
+        display: flex;
+        gap: 1rem;
     }
 }
 </style>
