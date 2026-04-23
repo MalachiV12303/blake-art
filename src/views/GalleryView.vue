@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import NumberFlow from '@number-flow/vue'
 import img1 from "@assets/img1.png";
 import img2 from "@assets/img2.png";
 import img3 from "@assets/img3.png";
@@ -162,7 +163,8 @@ function handleImageLoad(event: Event, index: number) {
       <button class="nav-btn left zalando-sans-expanded" @click.stop="showPrev">‹</button>
 
       <div class="counter">
-        <span>{{ getFormattedIndex(selectedIndex + 1) }}/{{ items.length }}</span>
+        <NumberFlow :value="selectedIndex + 1" :format="{ minimumIntegerDigits: 2, useGrouping: false }"/>
+        <span>/{{ items.length }}</span>
       </div>
 
       <Transition :name="direction">
@@ -193,9 +195,10 @@ function handleImageLoad(event: Event, index: number) {
 .counter {
   position: absolute;
   top: 5%;
-  left: 3%;
+  left: 4%;
   font-size: 3rem;
   color: white;
+  font-variant-numeric: tabular-nums;
 }
 
 .masonry-item {
