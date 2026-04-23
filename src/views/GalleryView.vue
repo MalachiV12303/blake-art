@@ -145,7 +145,7 @@ function handleImageLoad(event: Event, index: number) {
 </script>
 
 <template>
-  <masonry-wall :items="items" :ssr-columns="1" :column-width="400" :gap="8">
+  <masonry-wall :items="items" :ssr-columns="1" :column-width="400" :gap="12">
     <template #default="{ item, index }">
       <button v-if="index < visibleCount" @click="openImage(index)" class="masonry-item">
         <img :src="item.url" :alt="'image #' + index" class="image" @load="handleImageLoad($event, index)"
