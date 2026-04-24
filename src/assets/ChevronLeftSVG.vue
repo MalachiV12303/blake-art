@@ -1,0 +1,13 @@
+<template>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left" viewBox="8 5 8 14"><path d="m15 18-6-6 6-6"/></svg>
+</template>
+
+<script>
+export default {
+    props: {
+        width: Number,
+        height: Number,
+    },
+    name: 'ChevronLeftSVG',
+};
+</script>

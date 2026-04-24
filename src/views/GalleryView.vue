@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import NumberFlow from '@number-flow/vue'
+import ChevronLeftSVG from "@assets/ChevronLeftSVG.vue";
+import ChevronRightSVG from "@assets/ChevronRightSVG.vue";
+
 import img1 from "@assets/img1.png";
 import img2 from "@assets/img2.png";
 import img3 from "@assets/img3.png";
@@ -105,7 +108,6 @@ const handleKeydown = (e: KeyboardEvent) => {
   else if (e.key === "ArrowRight") showNext();
   else if (e.key === "ArrowLeft") showPrev();
 };
-
 const handleWheel = (e: WheelEvent) => {
   if (selectedIndex.value === null) return;
   if (e.deltaY > 0) showNext();
@@ -118,7 +120,6 @@ const handleTouchEnd = (e: TouchEvent) => {
   const diffX = e.changedTouches[0].clientX - touchStartX;
   if (Math.abs(diffX) > 50) diffX < 0 ? showNext() : showPrev();
 };
-const getFormattedIndex = (number: number) => String(number).padStart(2, "0");
 
 onMounted(() => {
   window.addEventListener("keydown", handleKeydown);
@@ -160,7 +161,7 @@ function handleImageLoad(event: Event, index: number) {
   <Transition name="fade">
     <div v-if="selectedIndex !== null" class="fullscreen-image" @click="closeImage" @touchstart="handleTouchStart"
       @touchend="handleTouchEnd">
-      <button class="nav-btn left zalando-sans-expanded" @click.stop="showPrev">‹</button>
+      <button class="nav-btn left zalando-sans-expanded" @click.stop="showPrev"><ChevronLeftSVG :width="40" :height="40" /></button>
 
       <div class="counter-container">
         <div class="counter">
@@ -179,7 +180,7 @@ function handleImageLoad(event: Event, index: number) {
           class="fullscreen-content" @click.stop />
       </Transition>
 
-      <button class="nav-btn right zalando-sans-expanded" @click.stop="showNext">›</button>
+      <button class="nav-btn right zalando-sans-expanded" @click.stop="showNext"><ChevronRightSVG :width="40" :height="40" /></button>
     </div>
   </Transition>
 </template>
@@ -252,7 +253,7 @@ function handleImageLoad(event: Event, index: number) {
 
 .fullscreen-content {
   max-width: 90%;
-  max-height: 90%;
+  max-height: 70%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -263,15 +264,31 @@ function handleImageLoad(event: Event, index: number) {
   background: transparent;
   border: none;
   color: white;
-  font-size: 6rem;
   cursor: pointer;
   z-index: 1100;
   transition: all 0.2s ease-in-out;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10%;
+  height: 100px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 6px 4px -4px rgba(0, 0, 0, 0.329);
 }
 
 .nav-btn:hover {
-  scale: 1.02;
+  background: rgba(0, 0, 0, 0.3);
 }
+
+.nav-btn svg{
+  transition: scale 0.1s ease-in-out;
+}
+
+/* .nav-btn:hover svg{
+  scale: 1.05;
+} */
 
 .nav-btn.left {
   left: 3%;
@@ -321,7 +338,7 @@ function handleImageLoad(event: Event, index: number) {
   opacity: 1;
 }
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 1200px) {
   .nav-btn {
     display: none;
   }
@@ -335,7 +352,7 @@ function handleImageLoad(event: Event, index: number) {
   }
 
   .fullscreen-content {
-    max-height: 75%;
+    max-height: 80%;
   }
 }
 </style>
